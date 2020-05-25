@@ -1,5 +1,4 @@
-# Projeto E-commerce
+# Projeto E-commerce (YouPhone Vendas)
 
-Projeto desenvolvido do zero no [Curso de PHP 7](https://www.udemy.com/curso-completo-de-php-7/) disponível na plataforma da Udemy e no site do [HTML5dev.com.br](https://www.html5dev.com.br/curso/curso-completo-de-php-7).
-
+Projeto desenvolvido para a disciplina Prática Profissional como projeto de conclusão do curso de Análise de Desenvolvimento de Sistemas
 Template usado no projeto [Almsaeed Studio](https://almsaeedstudio.com)
