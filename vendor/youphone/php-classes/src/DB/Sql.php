@@ -1,6 +1,6 @@
 <?php 
 
-namespace Hcode\DB;
+namespace Youphone\DB;
 
 class Sql {
 
