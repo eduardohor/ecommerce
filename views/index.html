@@ -20,7 +20,7 @@
 							<h4 class="caption subtitle">school supplies & backpacks.*</h4>
 							<a class="caption button-radius" href="#"><span class="icon"></span>Comprar</a>
 						</div>
-					</li>
+					</li>s
 					<li><img src="/res/site/img/h4-slide3.png" alt="Slide">
 						<div class="caption-group">
 							<h2 class="caption title">
@@ -208,7 +208,7 @@
             <div class="row">
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-about-us">
-                        <h2>Hcode Store</h2>
+                        <h2>YouPhone Vendas</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sunt id doloribus vero quam laborum quas alias dolores blanditiis iusto consequatur, modi aliquid eveniet eligendi iure eaque ipsam iste, pariatur omnis sint! Suscipit, debitis, quisquam. Laborum commodi veritatis magni at?</p>
                         <div class="footer-social">
                             <a href="https://www.facebook.com/hcodebr" target="_blank"><i class="fa fa-facebook"></i></a>
