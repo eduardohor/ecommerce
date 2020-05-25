@@ -2,8 +2,8 @@
     "name": "eduardohor/ecommerce",
     "authors": [
         {
-            "name": "Pratica profissional",
-            "email": "eduardo.hor@outlook.com"
+            "name": "Grupo Pratica profissional",
+            "email": "youphonevendas@gmail.com"
         }
     ],
     "require": {
@@ -13,7 +13,7 @@
     },
     "autoload": {
         "psr-4": {
-            "": "vendor\\hcodebr\\php-classes\\src"
+            "Hcode\\": "vendor\\hcodebr\\php-classes\\src"
         }
     }
 }
