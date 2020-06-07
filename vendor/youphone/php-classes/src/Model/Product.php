@@ -59,7 +59,7 @@ class Product extends Model{
 			':idproduct'=>$idproduct
 		]);
 
-		$this->setData($results[0]);
+//		$this->setData($results[0]);
 
 	}
 
