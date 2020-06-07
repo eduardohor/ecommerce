@@ -13,6 +13,7 @@ class Model{
 		$fieldname = substr($name, 3, strlen($name));
 
 		switch ($method) {
+			
 			case 'get':
 				return (isset($this->values[$fieldname])) ? $this->values[$fieldname] : NULL;
 			break;
@@ -23,7 +24,8 @@ class Model{
 		}
 	}
 
-	public function setData($data = array()){
+	public function setData($data = array())
+	{
 
 		foreach ($data as $key => $value) {
 			
