@@ -5,18 +5,16 @@ namespace Youphone\Model;
 use \Youphone\DB\Sql;
 use \Youphone\Model;
 use \Youphone\Mailer;
-use \Youphone\Model\Product;
 
-class Category extends Model{
-
-	
+class Category extends Model {
 
 	public static function listAll()
 	{
 
 		$sql = new Sql();
 
-		return $sql->SELECT("SELECT * FROM tb_categories ORDER BY descategory");
+		return $sql->select("SELECT * FROM tb_categories ORDER BY descategory");
+
 	}
 
 	public function save()
@@ -24,8 +22,7 @@ class Category extends Model{
 
 		$sql = new Sql();
 
-		$results = $sql->select("CALL sp_categories_save(:idcategory, :descategory)", 
-			array(
+		$results = $sql->select("CALL sp_categories_save(:idcategory, :descategory)", array(
 			":idcategory"=>$this->getidcategory(),
 			":descategory"=>$this->getdescategory()
 		));
@@ -33,7 +30,6 @@ class Category extends Model{
 		$this->setData($results[0]);
 
 		Category::updateFile();
-
 
 	}
 
@@ -53,11 +49,11 @@ class Category extends Model{
 	public function delete()
 	{
 
-		$sql = new Sql();	
-		
+		$sql = new Sql();
+
 		$sql->query("DELETE FROM tb_categories WHERE idcategory = :idcategory", [
 			':idcategory'=>$this->getidcategory()
-		]);	
+		]);
 
 		Category::updateFile();
 
@@ -74,7 +70,7 @@ class Category extends Model{
 			array_push($html, '<li><a href="/categories/'.$row['idcategory'].'">'.$row['descategory'].'</a></li>');
 		}
 
-		file_put_contents($_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR."views".DIRECTORY_SEPARATOR. "categories-menu.html", implode('', $html));
+		file_put_contents($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . "views" . DIRECTORY_SEPARATOR . "categories-menu.html", implode('', $html));
 
 	}
 
@@ -84,16 +80,16 @@ class Category extends Model{
 		$sql = new Sql();
 
 		if ($related === true) {
-			
+
 			return $sql->select("
 				SELECT * FROM tb_products WHERE idproduct IN(
 					SELECT a.idproduct
-					FROM tb_products a 
+					FROM tb_products a
 					INNER JOIN tb_productscategories b ON a.idproduct = b.idproduct
 					WHERE b.idcategory = :idcategory
 				);
 			", [
-				'idcategory'=>$this->getidcategory()
+				':idcategory'=>$this->getidcategory()
 			]);
 
 		} else {
@@ -101,16 +97,46 @@ class Category extends Model{
 			return $sql->select("
 				SELECT * FROM tb_products WHERE idproduct NOT IN(
 					SELECT a.idproduct
-					FROM tb_products a 
+					FROM tb_products a
 					INNER JOIN tb_productscategories b ON a.idproduct = b.idproduct
 					WHERE b.idcategory = :idcategory
 				);
 			", [
-				'idcategory'=>$this->getidcategory()
+				':idcategory'=>$this->getidcategory()
 			]);
 
 		}
 
+	}
+
+	public function getProductsPage($page = 1, $itensPerPage = 8)
+	{
+
+		$start = ($page - 1) * $itensPerPage;
+
+		$sql = new Sql();
+
+		$results = $sql->select("
+			SELECT SQL_CALC_FOUND_ROWS *
+				FROM tb_products a
+				INNER JOIN tb_productscategories b ON a.idproduct = b.idproduct
+				INNER JOIN tb_categories c ON c.idcategory = b.idcategory
+				WHERE c.idcategory = :idcategory
+				LIMIT $start, $itensPerPage;
+		", [
+			':idcategory'=>$this->getidcategory()
+		]);
+
+		$resultsTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal;");
+
+		return [
+
+			'data'=>Product::checkList($results),
+			'total'=>(int)$resultsTotal[0]["nrtotal"],
+			'pages'=>ceil($resultsTotal[0]["nrtotal"] / $itensPerPage)
+
+		];
+	
 	}
 
 	public function addProduct(Product $product)
