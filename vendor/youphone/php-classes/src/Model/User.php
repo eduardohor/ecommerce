@@ -9,7 +9,7 @@ use \Youphone\Mailer;
 class User extends Model {
 
 	const SESSION = "User";
-	const SECRET = "HcodePhp7_Secret";
+	const SECRET = "Youphonev_Secret";
 	const ERROR = "UserError";
 	const ERROR_REGISTER = "UserErrorRegister";
 
@@ -194,7 +194,7 @@ class User extends Model {
 
 	}
 
-	public static function getForgot($email)
+	public static function getForgot($email, $inadmin = true)
 	{
 
 		$sql = new Sql();
@@ -230,34 +230,45 @@ class User extends Model {
 
 			}
 			else
-			{
+	         {
+	             $dataRecovery = $results2[0];
 
-				$dataRecovery = $results2[0];
+	             $iv = random_bytes(openssl_cipher_iv_length('aes-256-cbc'));
 
-				$code = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_128, User::SECRET, $dataRecovery["idrecovery"], MCRYPT_MODE_ECB));
+	             $code = openssl_encrypt($dataRecovery['idrecovery'], 'aes-256-cbc', User::SECRET, 0, $iv);
 
-				$link = "http://www.hcodecommerce.com.br/admin/forgot/reset?code=$code";
+	             $result = base64_encode($iv.$code);
 
-				$mailer = new Mailer($data["desemail"], $data["desperson"], "Redefinir Senha da Hcode Store", "forgot", array(
-					"name"=>$data["desperson"],
-					"link"=>$link
-				));
+	             if ($inadmin === true) {
+	                 $link = "http://www.youphonevendas.com.br/admin/forgot/reset?code=$result";
+	             } 
+	             else
+	             {
+	                 $link = "http://www.youphonevendas.com.br/forgot/reset?code=$result";
+	             } 
 
-				$mailer->send();
+	             $mailer = new Mailer($data['desemail'], $data['desperson'], "Redefinir senha da YouPhone Vendas", "forgot", array(
+	                 "name"=>$data['desperson'],
+	                 "link"=>$link
+	             ));
 
-				return $data;
+	             $mailer->send();
 
-			}
+	             return $link;
+	         }
+	     }
+	 }
 
-
-		}
-
-	}
-
-	public static function validForgotDecrypt($code)
+	public static function validForgotDecrypt($result)
 	{
 
-		$idrecovery = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, User::SECRET, base64_decode($code), MCRYPT_MODE_ECB);
+		$result = base64_decode($result);
+
+	    $code = mb_substr($result, openssl_cipher_iv_length('aes-256-cbc'), null, '8bit');
+
+	    $iv = mb_substr($result, 0, openssl_cipher_iv_length('aes-256-cbc'), '8bit');;
+
+	    $idrecovery = openssl_decrypt($code, 'aes-256-cbc', User::SECRET, 0, $iv);
 
 		$sql = new Sql();
 
@@ -375,7 +386,7 @@ class User extends Model {
 
 	}
 
-	public static function getPassswordHash($password)
+	public static function getPasswordHash($password)
 	{
 
 		return password_hash($password, PASSWORD_DEFAULT, [
