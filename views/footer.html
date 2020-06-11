@@ -5,11 +5,11 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-about-us">
                         <h2>YouPhone Vendas</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sunt id doloribus vero quam laborum quas alias dolores blanditiis iusto consequatur, modi aliquid eveniet eligendi iure eaque ipsam iste, pariatur omnis sint! Suscipit, debitis, quisquam. Laborum commodi veritatis magni at?</p>
+                        <p>Pessoas influenciam pessoas. Nada influencia mais a decisão de compra que a recomendação de um amigo confiável.” – Mark Zuckerberg</p>
                         <div class="footer-social">
-                            <a href="https://www.facebook.com/hcodebr" target="_blank"><i class="fa fa-facebook"></i></a>
-                            <a href="https://twitter.com/hcodebr" target="_blank"><i class="fa fa-twitter"></i></a>
-                            <a href="https://www.youtube.com/channel/UCjWENuSH2gX55-y7QSZiWxA" target="_blank"><i class="fa fa-youtube"></i></a>
+                            <a href="https://www.facebook.com/eduardo.henrryke" target="_blank"><i class="fa fa-facebook"></i></a>
+                            <a href="https://twitter.com/eduardoo_ti" target="_blank"><i class="fa fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/eduardohenrique.ti/" target="_blank"><i class="fa fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
@@ -18,7 +18,7 @@
                     <div class="footer-menu">
                         <h2 class="footer-wid-title">Navegação </h2>
                         <ul>
-                            <li><a href="#">Minha Conta</a></li>
+                            <li><a href="/profile">Minha Conta</a></li>
                             <li><a href="#">Meus Pedidos</a></li>
                             <li><a href="#">Lista de Desejos</a></li>
                         </ul>                        
@@ -36,12 +36,12 @@
                 
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-newsletter">
-                        <h2 class="footer-wid-title">Newsletter</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sunt id doloribus!</p>
+                        <h2 class="footer-wid-title">Receber novidades em seu e-mail</h2>
+                        <p>Se você criar um caso de amor com seus clientes, eles próprios farão sua publicidade.” -Philip Kotler</p>
                         <div class="newsletter-form">
                             <form action="#">
-                                <input type="email" placeholder="Type your email">
-                                <input type="submit" value="Subscribe">
+                                <input type="email" placeholder="Digite aqui seu e-mail">
+                                <input type="submit" value="Cadastrar">
                             </form>
                         </div>
                     </div>
